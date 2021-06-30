@@ -1,0 +1,17 @@
+---
+- hosts: all
+  vars:
+    GIT_REPO: <private-repo-url>
+    GIT_BRANCH: master
+    USER: ubuntu
+    PROJECT_NAME: ansible-clone-repo
+  gather_facts: no
+
+  tasks:
+    - name: Clone a private repository into {{PROJECT_NAME}} folder.
+      git:
+        repo: "{{ GIT_REPO }}"
+        version: "{{ GIT_BRANCH }}"
+        dest: "/home/{{ USER }}/{{ PROJECT_NAME }}"
+        accept_hostkey: yes
+      become: no
